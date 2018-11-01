@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.9
--- http://www.phpmyadmin.net
+-- version 4.6.6deb5
+-- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Oct 30, 2018 at 03:30 AM
--- Server version: 5.6.14
--- PHP Version: 5.5.6
+-- Host: localhost:3306
+-- Generation Time: Nov 01, 2018 at 11:45 AM
+-- Server version: 5.7.24-0ubuntu0.18.04.1
+-- PHP Version: 7.2.11-2+ubuntu18.04.1+deb.sury.org+1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `db_techno`
@@ -26,8 +26,8 @@ SET time_zone = "+00:00";
 -- Table structure for table `tbl_agenda`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_agenda` (
-  `agenda_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbl_agenda` (
+  `agenda_id` int(11) NOT NULL,
   `agenda_nama` varchar(200) DEFAULT NULL,
   `agenda_tanggal` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `agenda_deskripsi` text,
@@ -36,9 +36,8 @@ CREATE TABLE IF NOT EXISTS `tbl_agenda` (
   `agenda_tempat` varchar(90) DEFAULT NULL,
   `agenda_waktu` varchar(30) DEFAULT NULL,
   `agenda_keterangan` varchar(200) DEFAULT NULL,
-  `agenda_author` varchar(60) DEFAULT NULL,
-  PRIMARY KEY (`agenda_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+  `agenda_author` varchar(60) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_agenda`
@@ -55,24 +54,23 @@ INSERT INTO `tbl_agenda` (`agenda_id`, `agenda_nama`, `agenda_tanggal`, `agenda_
 -- Table structure for table `tbl_album`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_album` (
-  `album_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbl_album` (
+  `album_id` int(11) NOT NULL,
   `album_nama` varchar(50) DEFAULT NULL,
   `album_tanggal` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `album_pengguna_id` int(11) DEFAULT NULL,
   `album_author` varchar(60) DEFAULT NULL,
   `album_count` int(11) DEFAULT '0',
-  `album_cover` varchar(40) DEFAULT NULL,
-  PRIMARY KEY (`album_id`),
-  KEY `album_pengguna_id` (`album_pengguna_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+  `album_cover` varchar(40) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_album`
 --
 
 INSERT INTO `tbl_album` (`album_id`, `album_nama`, `album_tanggal`, `album_pengguna_id`, `album_author`, `album_count`, `album_cover`) VALUES
-(4, 'Meme', '2017-01-24 01:31:13', 1, 'M Fikri Setiadi', 8, '463cc7af7e2f6907c0aea38df42bb31c.jpg');
+(5, 'Bromo', '2018-10-31 14:14:10', 1, 'Administrator', 9, 'dc9ac0558d133f4f9a82db2b8b007708.jpg'),
+(6, 'Malang', '2018-10-31 14:21:40', 1, 'Administrator', 0, '69e326e37d3abce94957b865bfb1c505.jpg');
 
 -- --------------------------------------------------------
 
@@ -80,16 +78,15 @@ INSERT INTO `tbl_album` (`album_id`, `album_nama`, `album_tanggal`, `album_pengg
 -- Table structure for table `tbl_files`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_files` (
-  `file_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbl_files` (
+  `file_id` int(11) NOT NULL,
   `file_judul` varchar(120) DEFAULT NULL,
   `file_deskripsi` text,
   `file_tanggal` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `file_oleh` varchar(60) DEFAULT NULL,
   `file_download` int(11) DEFAULT '0',
-  `file_data` varchar(120) DEFAULT NULL,
-  PRIMARY KEY (`file_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+  `file_data` varchar(120) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_files`
@@ -114,32 +111,30 @@ INSERT INTO `tbl_files` (`file_id`, `file_judul`, `file_deskripsi`, `file_tangga
 -- Table structure for table `tbl_galeri`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_galeri` (
-  `galeri_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbl_galeri` (
+  `galeri_id` int(11) NOT NULL,
   `galeri_judul` varchar(60) DEFAULT NULL,
   `galeri_tanggal` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `galeri_gambar` varchar(40) DEFAULT NULL,
   `galeri_album_id` int(11) DEFAULT NULL,
   `galeri_pengguna_id` int(11) DEFAULT NULL,
-  `galeri_author` varchar(60) DEFAULT NULL,
-  PRIMARY KEY (`galeri_id`),
-  KEY `galeri_album_id` (`galeri_album_id`),
-  KEY `galeri_pengguna_id` (`galeri_pengguna_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
+  `galeri_author` varchar(60) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_galeri`
 --
 
 INSERT INTO `tbl_galeri` (`galeri_id`, `galeri_judul`, `galeri_tanggal`, `galeri_gambar`, `galeri_album_id`, `galeri_pengguna_id`, `galeri_author`) VALUES
-(12, 'Follow Your Passion', '2017-01-24 01:31:42', '8be5f0f0904340052a4cbd0ea025251e.jpg', 4, 1, 'M Fikri Setiadi'),
-(13, 'Follow Your Passion', '2017-01-24 01:31:55', 'd769c3541429f21b28611cc9f32166ad.jpg', 4, 1, 'M Fikri Setiadi'),
-(14, 'Follow Your Passion', '2017-01-24 01:32:24', '43d0f103096700aacefe492514c1805c.png', 4, 1, 'M Fikri Setiadi'),
-(15, 'Follow Your Passion', '2017-01-24 01:32:34', 'd67a9e90d263f2979cbf602d238516e1.jpg', 4, 1, 'M Fikri Setiadi'),
-(16, 'Follow Your Passion', '2017-01-24 01:32:44', '8223854edfccc98c6aab50ceab60ca7d.jpg', 4, 1, 'M Fikri Setiadi'),
-(17, 'Follow Your Passion', '2017-01-24 01:33:08', 'af30c686978c87c80ba1e6e3b23ec5a1.png', 4, 1, 'M Fikri Setiadi'),
-(18, 'Follow Your Passion', '2017-01-24 01:33:24', '232917c52826dd08e32320aa6a3fac8c.png', 4, 1, 'M Fikri Setiadi'),
-(19, 'Follow Your Passion', '2017-08-08 00:54:58', '59afe5b3cd629ab2735f9c7a2af8d85f.jpg', 4, 1, 'M Fikri Setiadi');
+(20, 'Bromo Tour', '2018-10-31 14:15:21', '70af123531facbd4bd2326f4ca660e64.jpg', 5, 1, 'Administrator'),
+(21, 'Bromo Tour 2', '2018-10-31 14:15:47', 'e452fe9fe9c27de0d8098ae2446a6584.jpg', 5, 1, 'Administrator'),
+(22, 'Tour 3', '2018-10-31 14:16:16', 'fc410f971a53d8361fceec178aa2b2e4.jpg', 5, 1, 'Administrator'),
+(23, 'tour 4', '2018-10-31 14:16:38', 'af994768b7984239c18155a53cb78eec.jpg', 5, 1, 'Administrator'),
+(24, 'Tpur 8', '2018-10-31 14:18:03', '317ecd5317b8df9f2101f9e8c8297bae.jpg', 5, 1, 'Administrator'),
+(25, 'Tour 6', '2018-10-31 14:18:27', 'cfeee3613d586e38f64d378848faafb7.jpg', 5, 1, 'Administrator'),
+(26, 'Tour 5', '2018-10-31 14:20:42', '2fe7acf97e0591b7db3b47c382488ca9.jpg', 5, 1, 'Administrator'),
+(27, 'tour bromo', '2018-10-31 14:20:59', '975b1688745a0f22127f09d8873c501f.jpg', 5, 1, 'Administrator'),
+(28, 'tour', '2018-10-31 14:21:28', '670c6288b274e4d4f7d3a52723b5d799.jpg', 5, 1, 'Administrator');
 
 -- --------------------------------------------------------
 
@@ -147,16 +142,15 @@ INSERT INTO `tbl_galeri` (`galeri_id`, `galeri_judul`, `galeri_tanggal`, `galeri
 -- Table structure for table `tbl_inbox`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_inbox` (
-  `inbox_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbl_inbox` (
+  `inbox_id` int(11) NOT NULL,
   `inbox_nama` varchar(40) DEFAULT NULL,
   `inbox_email` varchar(60) DEFAULT NULL,
   `inbox_kontak` varchar(20) DEFAULT NULL,
   `inbox_pesan` text,
   `inbox_tanggal` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `inbox_status` int(11) DEFAULT '1' COMMENT '1=Belum dilihat, 0=Telah dilihat',
-  PRIMARY KEY (`inbox_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `inbox_status` int(11) DEFAULT '1' COMMENT '1=Belum dilihat, 0=Telah dilihat'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -164,22 +158,19 @@ CREATE TABLE IF NOT EXISTS `tbl_inbox` (
 -- Table structure for table `tbl_kategori`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_kategori` (
-  `kategori_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbl_kategori` (
+  `kategori_id` int(11) NOT NULL,
   `kategori_nama` varchar(30) DEFAULT NULL,
-  `kategori_tanggal` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`kategori_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+  `kategori_tanggal` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_kategori`
 --
 
 INSERT INTO `tbl_kategori` (`kategori_id`, `kategori_nama`, `kategori_tanggal`) VALUES
-(1, 'Biografi', '2016-09-06 05:49:04'),
-(2, 'Teknologi', '2016-09-06 05:50:01'),
-(3, 'Tips and Triks', '2016-09-06 05:59:39'),
-(5, 'Penelitian', '2016-09-06 06:19:26');
+(6, 'Kuliner', '2018-10-31 14:44:52'),
+(7, 'Wisata', '2018-10-31 14:45:00');
 
 -- --------------------------------------------------------
 
@@ -187,8 +178,8 @@ INSERT INTO `tbl_kategori` (`kategori_id`, `kategori_nama`, `kategori_tanggal`) 
 -- Table structure for table `tbl_komentar`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_komentar` (
-  `komentar_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbl_komentar` (
+  `komentar_id` int(11) NOT NULL,
   `komentar_nama` varchar(30) DEFAULT NULL,
   `komentar_email` varchar(50) DEFAULT NULL,
   `komentar_web` varchar(100) DEFAULT NULL,
@@ -196,10 +187,8 @@ CREATE TABLE IF NOT EXISTS `tbl_komentar` (
   `komentar_tanggal` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `komentar_status` int(2) DEFAULT '0',
   `komentar_tulisan_id` int(11) DEFAULT NULL,
-  `komentar_parent` int(11) DEFAULT '0',
-  PRIMARY KEY (`komentar_id`),
-  KEY `komentar_tulisan_id` (`komentar_tulisan_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+  `komentar_parent` int(11) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_komentar`
@@ -219,17 +208,15 @@ INSERT INTO `tbl_komentar` (`komentar_id`, `komentar_nama`, `komentar_email`, `k
 -- Table structure for table `tbl_log_aktivitas`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_log_aktivitas` (
-  `log_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbl_log_aktivitas` (
+  `log_id` int(11) NOT NULL,
   `log_nama` text,
   `log_tanggal` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `log_ip` varchar(20) DEFAULT NULL,
   `log_pengguna_id` int(11) DEFAULT NULL,
   `log_icon` blob,
-  `log_jenis_icon` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`log_id`),
-  KEY `log_pengguna_id` (`log_pengguna_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `log_jenis_icon` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -237,8 +224,8 @@ CREATE TABLE IF NOT EXISTS `tbl_log_aktivitas` (
 -- Table structure for table `tbl_pengguna`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_pengguna` (
-  `pengguna_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbl_pengguna` (
+  `pengguna_id` int(11) NOT NULL,
   `pengguna_nama` varchar(50) DEFAULT NULL,
   `pengguna_moto` varchar(100) DEFAULT NULL,
   `pengguna_jenkel` varchar(2) DEFAULT NULL,
@@ -254,9 +241,8 @@ CREATE TABLE IF NOT EXISTS `tbl_pengguna` (
   `pengguna_status` int(2) DEFAULT '1',
   `pengguna_level` varchar(3) DEFAULT NULL,
   `pengguna_register` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `pengguna_photo` varchar(40) DEFAULT NULL,
-  PRIMARY KEY (`pengguna_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+  `pengguna_photo` varchar(40) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_pengguna`
@@ -271,13 +257,12 @@ INSERT INTO `tbl_pengguna` (`pengguna_id`, `pengguna_nama`, `pengguna_moto`, `pe
 -- Table structure for table `tbl_pengunjung`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_pengunjung` (
-  `pengunjung_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbl_pengunjung` (
+  `pengunjung_id` int(11) NOT NULL,
   `pengunjung_tanggal` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `pengunjung_ip` varchar(40) DEFAULT NULL,
-  `pengunjung_perangkat` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`pengunjung_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=949 ;
+  `pengunjung_perangkat` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_pengunjung`
@@ -1232,7 +1217,9 @@ INSERT INTO `tbl_pengunjung` (`pengunjung_id`, `pengunjung_tanggal`, `pengunjung
 (945, '2017-10-29 03:44:46', '::1', 'Firefox'),
 (946, '2018-10-23 01:11:49', '::1', 'Firefox'),
 (947, '2018-10-24 02:13:50', '::1', 'Firefox'),
-(948, '2018-10-29 04:56:37', '127.0.0.1', 'Firefox');
+(948, '2018-10-29 04:56:37', '127.0.0.1', 'Firefox'),
+(949, '2018-10-30 13:35:51', '::1', 'Chrome'),
+(950, '2018-10-31 13:15:24', '::1', 'Chrome');
 
 -- --------------------------------------------------------
 
@@ -1240,15 +1227,14 @@ INSERT INTO `tbl_pengunjung` (`pengunjung_id`, `pengunjung_tanggal`, `pengunjung
 -- Table structure for table `tbl_portfolio`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_portfolio` (
-  `port_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbl_portfolio` (
+  `port_id` int(11) NOT NULL,
   `port_judul` varchar(200) DEFAULT NULL,
   `port_deskripsi` text,
   `port_tanggal` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `port_author` varchar(40) DEFAULT NULL,
-  `port_image` varchar(40) DEFAULT NULL,
-  PRIMARY KEY (`port_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+  `port_image` varchar(40) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_portfolio`
@@ -1268,14 +1254,13 @@ INSERT INTO `tbl_portfolio` (`port_id`, `port_judul`, `port_deskripsi`, `port_ta
 -- Table structure for table `tbl_post_rating`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_post_rating` (
-  `rate_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbl_post_rating` (
+  `rate_id` int(11) NOT NULL,
   `rate_tanggal` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `rate_ip` varchar(40) DEFAULT NULL,
   `rate_point` int(11) DEFAULT NULL,
-  `rate_tulisan_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`rate_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+  `rate_tulisan_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_post_rating`
@@ -1295,13 +1280,12 @@ INSERT INTO `tbl_post_rating` (`rate_id`, `rate_tanggal`, `rate_ip`, `rate_point
 -- Table structure for table `tbl_post_views`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_post_views` (
-  `views_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbl_post_views` (
+  `views_id` int(11) NOT NULL,
   `views_tanggal` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `views_ip` varchar(40) DEFAULT NULL,
-  `views_tulisan_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`views_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=55 ;
+  `views_tulisan_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_post_views`
@@ -1361,7 +1345,9 @@ INSERT INTO `tbl_post_views` (`views_id`, `views_tanggal`, `views_ip`, `views_tu
 (51, '2017-10-28 00:13:14', '::1', 0),
 (52, '2017-10-29 04:16:58', '::1', 30),
 (53, '2017-10-29 04:16:59', '::1', 0),
-(54, '2017-10-29 04:23:42', '::1', 31);
+(54, '2017-10-29 04:23:42', '::1', 31),
+(55, '2018-10-31 14:48:10', '::1', 32),
+(56, '2018-10-31 14:48:11', '::1', 0);
 
 -- --------------------------------------------------------
 
@@ -1369,14 +1355,13 @@ INSERT INTO `tbl_post_views` (`views_id`, `views_tanggal`, `views_ip`, `views_tu
 -- Table structure for table `tbl_testimoni`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_testimoni` (
-  `testimoni_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbl_testimoni` (
+  `testimoni_id` int(11) NOT NULL,
   `testimoni_nama` varchar(30) DEFAULT NULL,
   `testimoni_isi` varchar(120) DEFAULT NULL,
   `testimoni_email` varchar(35) DEFAULT NULL,
-  `testimoni_tanggal` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`testimoni_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `testimoni_tanggal` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -1384,8 +1369,8 @@ CREATE TABLE IF NOT EXISTS `tbl_testimoni` (
 -- Table structure for table `tbl_tulisan`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_tulisan` (
-  `tulisan_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbl_tulisan` (
+  `tulisan_id` int(11) NOT NULL,
   `tulisan_judul` varchar(200) DEFAULT NULL,
   `tulisan_isi` text,
   `tulisan_tanggal` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
@@ -1397,25 +1382,196 @@ CREATE TABLE IF NOT EXISTS `tbl_tulisan` (
   `tulisan_author` varchar(40) DEFAULT NULL,
   `tulisan_img_slider` int(2) NOT NULL DEFAULT '0',
   `tulisan_slug` varchar(250) DEFAULT NULL,
-  `tulisan_rating` int(11) DEFAULT '0',
-  PRIMARY KEY (`tulisan_id`),
-  KEY `tulisan_kategori_id` (`tulisan_kategori_id`),
-  KEY `tulisan_pengguna_id` (`tulisan_pengguna_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
+  `tulisan_rating` int(11) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_tulisan`
 --
 
 INSERT INTO `tbl_tulisan` (`tulisan_id`, `tulisan_judul`, `tulisan_isi`, `tulisan_tanggal`, `tulisan_kategori_id`, `tulisan_kategori_nama`, `tulisan_views`, `tulisan_gambar`, `tulisan_pengguna_id`, `tulisan_author`, `tulisan_img_slider`, `tulisan_slug`, `tulisan_rating`) VALUES
-(25, 'Steve Jobs APPLE I', '<p>Selama akhir 1960-an, telah terjadi penyatuan berbagai macam arus budaya di San Francisco dan Silicon Valley. Pada saat itu, ada sebuah revolusi teknologi yang di awali dengan berkembangnya perusahaan kontraktor militer. Tak lama kemudian, perusahaan elektronik, produsen mikrocip, desainer permainan video, dan perusahaan computer juga terlihat dalam proses revolusi teknologi tersebut. Orang-orang yang masuk dalam kelompok subkultur peretas (<em>hacker),</em> para perekayasa peraangkat lunak,dan anak-anak warga San Francisco serta Silicon Valley, banyak yang merasa cocok dengan peraturan yang dibuat oleh HP. Mereka juga merasa tidak cocok dengan cara berpikir orang-orang di perusahaan HP yang berada di wilayah tersebut.</p>\r\n\r\n<p>Pada saat itu, muncul sebuah kelompok yang berlagak sebagai akademisi. Mereka meneliti tentang efek LSD. Salah satu partisipan dalam penelitian mereka adalah Doug Engelbart yang berasal dari Augmentation Research Center di Palo Alto, yang kemudian membantu mengembangkan tetikus computer dan penggunaan antarmuka grafis. Partisipan yang lain nya adalah Ken Kesey. Dia menggunakan obat terlarang itu dengan diiringi pertunjukan music serta tata cahaya lampu yang menampilkan Grateful Dead, grup music setempat. Selain itu,muncul pula gerakan kelompok <em>hippie, </em>yang terbentuk dari para generasi muda di Bay Area, dan aktivitas politik pemberontakan, yang lahir dari komunitas Gerakan Bebas Berbicara di Berkeley. Di samping kemunculan para kelompok pemberontak bertujuan untuk mencari jalan menuju pencerahan diri. Gerakan pemuasan terhadap meditasi dan yoga, terapi lain muncul dalam bentuk ajaran Zen dan Hindu, medisi dan yoga, terapi menjerit kuno dan kehilangan sensoris, serta Lembaga Esalen dan Organisasi <em>est.</em></p>\r\n\r\n<p>Dia bermeditasi di pagi hari, meengikuti kelas fisika di kampus Standford, bekerja pada malam hari di Atari, dan saat tidur bermimpi mendirikan bisnisnya sendiri. &ldquo;sesuatu sedang terjadi disini,&rdquo;katanya, saat mengingatkan kembali zaman dan tempat itu.&rdquo; Musik terbaik berasal dari sini&mdash;Grateful Dead, Jefferson Airplane, Joan Baez, Janis Joplin&mdash;dan begitu banyak sirkuit terpadu, serta benda seperti <em>Whole Earth Catalog&rdquo;.</em></p>\r\n\r\n<p>Pada awalnya, para ahli teknologi dan ppengikut <em>hippie </em>tidak begitu rukun. Sebagian besar budaya pemberotak menganggap bahwa computer tidak menyenangkan, sama seperti Orwellian, yaitu provinsi tempat gedung Pertahanan Amerika Pentagon dan Pembangkit Tenaga Listrik berada. Dalam bukunya <em>The Myth of the Machine,</em> sejarawan Lewis Mumford memperingatkan bahwa komputer telah merampas kebebasan kita dan menghancurkan &ldquo;nilai-nilai yang memperkaya hidup&rdquo;. Peringatan di komputer pada saat itu &ldquo;jangan dilipat, digulung, atau dipotong&rdquo; menjadi kalimat ironis yang berasal dari sisa zaman anti-perang.</p>\r\n\r\n<p>Kemudian, pada awal tahun 1970-an, terjadi perubahan cara berpikir. &ldquo;<em>komputer pun berubah, dari alat kendali birokrasi yang ditolak, menjadi lambang ekspresi dan kebebasan pribadi yang diterima,&rdquo; </em>&nbsp;tulis John Markoff dalam studinya tentang pertemuan antara budaya pemberontak dan industri komputer, yang diberi judul <em>What the Dormouse Said.</em> Keadaan itu merupakan semangat khas yang berasal dari zaman tersebut. Perubahan itu kemudian dituangkan dalam puisi karya Richard Brautigan dengan judul <em>All Whatched Over By Machines of Loving Grace </em>pada 1967.</p>\r\n\r\n<p>Kepopuleran teknologi pun semakin dipertegas ketika Timothy Leary mengumumkan bahwa komputer pribadi telah menjadi sebuah candu baru. Leary memperbaiki kalimat terkenal yang berbunyi&rdquo; <em>Jangan dilipat, digulung, atau di potong!&rdquo; </em>&nbsp;dengan mengatakan, &ldquo;<em>Nyalakan, hidupkan, dan sambungkan.&rdquo; </em>Musisi Bono, yang nantinya menjadi teman Jobs, sering berdiskusi dengannya mengenai alasan &nbsp;mereka menganut&nbsp; budaya dan music pemberontak.</p>\r\n', '2017-08-07 01:56:13', 1, 'Pendidikan', 5, '8a72366bb48eb2bbd381eee2f0447512.jpg', 1, 'M Fikri Setiadi', 0, 'steve-jobs-apple-i.html', 0),
-(26, 'Siapa itu SCULLEY di perusahaan APPLE? ', '<p>Mike markkula tidak pernah memiliki keinginan untuk menjadi presiden direktur APPLE. Dia lebih suka mendesain beberapa rumah barunya, menerbangkan pesawat pribadinya, dan hidup dengan mengandalkan bagian sahamnya.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel. Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n', '2017-08-07 02:09:34', 1, 'Biografi', 3, 'd3395608ba54f383dd75ed34dd51e23c.jpg', 1, 'Administrator', 0, 'siapa-itu-sculley-di-perusahaan-apple-.html', 4),
-(27, 'Tiga CPU termasuk 8-core dengan harga mulai dari $ 549', '<p>AMD telah mengumumkan penetapan harga akhir dan jajaran jajaran prosesor desktop high-end baru - atau dikenal sebagai Ryzen Threadripper. Berita tersebut berasal dari acara pra-peluncuran resmi untuk Threadripper dan kartu grafis high-end, Vega, yang diadakan di Los Angeles akhir pekan lalu. Tiga model direncanakan, dengan 8, 12 dan 16 core dan harga akan mulai dari $ 549 untuk model 8-c0re / 16-thread.<br />\r\n<!--[if !supportLineBreakNewLine]--><br />\r\n<!--[endif]--></p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel. Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n', '2017-08-07 02:19:28', 2, 'Teknologi', 4, 'b8b9d4133aee118342a28369ebcd1c7d.jpg', 1, 'Administrator', 0, 'tiga-cpu-termasuk-8-core-dengan-harga-mulai-dari--549.html', 2),
-(28, 'Steve Jobs dengan perusahaan ATARI', '<p>Alirann Zen dan Seni Mendesain Permainan</p>\r\n\r\n<p>Atari pada Februari 1974, setelah delapan belas tahun luntang-lantung di Universitas&nbsp; Ree, Jobs memutuskan untuk kembali ke rumah orang tuanya di Los Altos dan mencari pekerjaan. Hal tersebut tidak sulit. Kolom khusus Koran Harian <em>San Jese Mercury</em> memuat hingga enam puluh halaman lowongan pekerjaan di bidang teknologi pada masa kejayaannya, selama 1970-an. Slaah satu lowongan tersebut menarik perhatian jobs.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel. Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n', '2017-08-07 02:26:36', 1, 'Biografi', 4, '14c77fa46cf0c66347554f6469275466.jpg', 1, 'Administrator', 0, 'steve-jobs-dengan-perusahaan-atari.html', 4),
-(29, 'WannaCry Hero Dibebankan Dengan Menciptakan $ 7000 Malware Perbankan', '<p>Dalam sebuah peristiwa yang mengherankan, orang yang menghentikan penyebaran uang tebusan WannaCry awal tahun ini telah ditangkap dan dikenai tuduhan menciptakan malware perbankan yang dikenal dengan Kronos.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel. Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n', '2017-08-07 02:36:39', 2, 'Teknologi', 4, 'bf687360506b89dea045e2545f35ac4f.jpg', 1, 'Administrator', 0, 'wannacry-hero-dibebankan-dengan-menciptakan--7000-malware-perbankan.html', 1),
-(30, 'Kebocoran iPhone 8 Baru Mengungkapkan Fitur yang Lebih Mengecewakan', '<p><em>Apple CEO Tim Cook delivers the opening keynote address the 2017 Apple</em></p>\r\n\r\n<p>Sudah lama sekali sejak Apple mampu menyimpan kejutan nyata dari beledu digital dan mengungkapkan &#39;satu hal&#39; yang sebenarnya selama sebuah keynote. Fase desain dan prototyping yang panjang, ditambah dengan rantai pasokan yang diperluas, telah menghasilkan garis manufaktur yang bocor.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel. Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n', '2017-08-07 02:46:11', 2, 'Teknologi', 11, '53243c24166c53ec24ac84b8f4c56940.jpg', 1, 'Administrator', 0, 'kebocoran-iphone-8-baru-mengungkapkan-fitur-yang-lebih-mengecewakan.html', 1),
-(31, 'Facebook Meluas Melawan Berita Fake Dengan Artikel Otomatis', '<p>Setelah pemilihan Presiden, ketika Facebook FB -0.23% menghadapi pengawasan karena memungkinkan penyebaran berita politik palsu, jaringan sosial terus mengambil langkah baru untuk memberantas informasi palsu di seluruh aplikasinya.<br />\r\n<!--[if !supportLineBreakNewLine]--><br />\r\n<!--[endif]-->Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel. Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel Ini adalah sampel artikel.</p>\r\n\r\n<p>&nbsp;</p>\r\n', '2017-08-07 02:51:02', 2, 'Teknologi', 10, '054646a61adf67fbc074f23415a96531.jpg', 1, 'Administrator', 0, 'facebook-meluas-melawan-berita-fake-dengan-artikel-otomatis.html', 3);
+(32, '7 Kuliner Kaki Lima Uenak Di Malang', '<p>1. Bakso Solo Petra<br />\r\nBakso di kawasan pasar Comboran ini uenak tenan rasanya. Walaupun tak banyak variasi, hanya ada pentol dan tahu tapi rasanya mantap. Walaupun tak ada meja kamu akan terhipnotis oleh rasa bakso yang enak dan bakal bikin kangen ini.</p>\r\n\r\n<p>2. Orem-oremPertukangan<br />\r\nWarung milik Pak H.M. Syahri ini kecil, namun tetap ramai. Tak hanya tempe dan kuah santan, orem-orem disini berisi potongan ketupat jumbo, tauge, dan bawang goreng. Sehingga tak jarang para pembeli bejibun. Orem-orem ini juga makanan khas Malang lo.</p>\r\n\r\n<p>3. Sego Resek</p>\r\n\r\n<p><img alt=\"\" src=\"http://amazingmalang.id/wp-content/uploads/2018/10/@rizalkuddah-300x300.jpg\" style=\"height:300px; width:300px\" /><br />\r\nWalaupun artinya nasi sampah, tapi sebenarnya bukan lo. Nasi mawut yang dimasak porsi jumbo diatas kompor arang dan kayu. Ada telur dan jeroan ayam yang bisa kamu pilih sebagai pelengkap. Rasanya endess banget deh.</p>\r\n\r\n<p>4. Ronde Titoni</p>\r\n\r\n<p><img alt=\"\" src=\"http://amazingmalang.id/wp-content/uploads/2018/10/@rizkysabariman-240x300.jpg\" style=\"height:300px; width:240px\" /><br />\r\nKuliner legenda ini juga rasanya juara. Ada ronde kering, ronde basah, ronde campur dan angsle untuk minumannya dengan rasa yang enak. Ca&rsquo;kwe dan roti goreng bisa menjadi pelengkapnya. Suasana dinginnya malam berpadu pas dengan ronde ini.</p>\r\n\r\n<p>5. Lalapan Cak No Sawahan</p>\r\n\r\n<p><img alt=\"\" src=\"http://amazingmalang.id/wp-content/uploads/2018/10/lalapan-@arindiah_citra-240x300.jpg\" style=\"height:300px; width:240px\" /><br />\r\nAda yang menyebutnya lalapan Ariel Noah. Mengapa? karena yang memasak berwajah mirip Ariel alias Ariel KW. Lalapannya enak ada ayam goreng, lele, burung dara, dan yang paling spesial dan favorit adalah bebeknya. Sambelnya juga mantap.</p>\r\n\r\n<p>6. Mie Ayam Solo Pak Doel</p>\r\n\r\n<p><img alt=\"\" src=\"http://amazingmalang.id/wp-content/uploads/2018/10/pak-doel-malang.merdeka.com_-300x200.jpg\" style=\"height:200px; width:300px\" /><br />\r\nMie ayam yang disajikan di sini terbilang enak dan harganya pun pas di kantong. Suwiran daging ayam serta bawang goreng dijamin bisa bikin kamu ketagihan. Kamu juga bisa tambah bakso, ceker ataupun telor. Tapi kamu wajib antri ya.</p>\r\n\r\n<p>7. Pangsit Mie Pak Rie</p>\r\n\r\n<p><img alt=\"\" src=\"http://amazingmalang.id/wp-content/uploads/2018/10/pak-ri-malang.merdeka.com_-300x200.jpg\" style=\"height:200px; width:300px\" /><br />\r\nMie Pangsit ini cocok untuk kamu yang sedang sangat lapar atau memang memiliki selera makan ekstra. Karena Mie Pangsit Pak Ri ini tidak tanggung-tanggung dalam memberikan mie, topping ayam, maupun sayur. Ada juga topping ati ayam yang yahuud.</p>\r\n\r\n<p>7 kuliner kaki lima uenak di malang</p>\r\n\r\n<p>1. bakso solo petra : Jl. Sartono S.h<br />\r\n2. orem orem pertukangan : Jl. Gatot Subroto No.72, Jodipan/<br />\r\n3. sego resek : Jl. Brigjend. Katamso No.4, Kauman<br />\r\n4. ronde titoni : Jl. Zainul Arifin No.17, Sukoharjo/<br />\r\n5. lalapan cak no sawahan : Jl. Sulawesi No.14, Kasin/<br />\r\n6. Mie ayam solo pak doel : Jl. Semanggi Timur No.1, Jatimulyo/<br />\r\n7. pangsit mie pak rie : Jl. Simpang Wilis Indah No.10, Gading Kasri/</p>\r\n', '2018-10-31 14:47:55', 6, 'Kuliner', 1, 'f4c488fe40f94a01fa7e8aa31a74d8b6.jpg', 1, 'Administrator', 0, '7-kuliner-kaki-lima-uenak-di-malang.html', 0);
 
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `tbl_agenda`
+--
+ALTER TABLE `tbl_agenda`
+  ADD PRIMARY KEY (`agenda_id`);
+
+--
+-- Indexes for table `tbl_album`
+--
+ALTER TABLE `tbl_album`
+  ADD PRIMARY KEY (`album_id`),
+  ADD KEY `album_pengguna_id` (`album_pengguna_id`);
+
+--
+-- Indexes for table `tbl_files`
+--
+ALTER TABLE `tbl_files`
+  ADD PRIMARY KEY (`file_id`);
+
+--
+-- Indexes for table `tbl_galeri`
+--
+ALTER TABLE `tbl_galeri`
+  ADD PRIMARY KEY (`galeri_id`),
+  ADD KEY `galeri_album_id` (`galeri_album_id`),
+  ADD KEY `galeri_pengguna_id` (`galeri_pengguna_id`);
+
+--
+-- Indexes for table `tbl_inbox`
+--
+ALTER TABLE `tbl_inbox`
+  ADD PRIMARY KEY (`inbox_id`);
+
+--
+-- Indexes for table `tbl_kategori`
+--
+ALTER TABLE `tbl_kategori`
+  ADD PRIMARY KEY (`kategori_id`);
+
+--
+-- Indexes for table `tbl_komentar`
+--
+ALTER TABLE `tbl_komentar`
+  ADD PRIMARY KEY (`komentar_id`),
+  ADD KEY `komentar_tulisan_id` (`komentar_tulisan_id`);
+
+--
+-- Indexes for table `tbl_log_aktivitas`
+--
+ALTER TABLE `tbl_log_aktivitas`
+  ADD PRIMARY KEY (`log_id`),
+  ADD KEY `log_pengguna_id` (`log_pengguna_id`);
+
+--
+-- Indexes for table `tbl_pengguna`
+--
+ALTER TABLE `tbl_pengguna`
+  ADD PRIMARY KEY (`pengguna_id`);
+
+--
+-- Indexes for table `tbl_pengunjung`
+--
+ALTER TABLE `tbl_pengunjung`
+  ADD PRIMARY KEY (`pengunjung_id`);
+
+--
+-- Indexes for table `tbl_portfolio`
+--
+ALTER TABLE `tbl_portfolio`
+  ADD PRIMARY KEY (`port_id`);
+
+--
+-- Indexes for table `tbl_post_rating`
+--
+ALTER TABLE `tbl_post_rating`
+  ADD PRIMARY KEY (`rate_id`);
+
+--
+-- Indexes for table `tbl_post_views`
+--
+ALTER TABLE `tbl_post_views`
+  ADD PRIMARY KEY (`views_id`);
+
+--
+-- Indexes for table `tbl_testimoni`
+--
+ALTER TABLE `tbl_testimoni`
+  ADD PRIMARY KEY (`testimoni_id`);
+
+--
+-- Indexes for table `tbl_tulisan`
+--
+ALTER TABLE `tbl_tulisan`
+  ADD PRIMARY KEY (`tulisan_id`),
+  ADD KEY `tulisan_kategori_id` (`tulisan_kategori_id`),
+  ADD KEY `tulisan_pengguna_id` (`tulisan_pengguna_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `tbl_agenda`
+--
+ALTER TABLE `tbl_agenda`
+  MODIFY `agenda_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `tbl_album`
+--
+ALTER TABLE `tbl_album`
+  MODIFY `album_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `tbl_files`
+--
+ALTER TABLE `tbl_files`
+  MODIFY `file_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+--
+-- AUTO_INCREMENT for table `tbl_galeri`
+--
+ALTER TABLE `tbl_galeri`
+  MODIFY `galeri_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+--
+-- AUTO_INCREMENT for table `tbl_inbox`
+--
+ALTER TABLE `tbl_inbox`
+  MODIFY `inbox_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `tbl_kategori`
+--
+ALTER TABLE `tbl_kategori`
+  MODIFY `kategori_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `tbl_komentar`
+--
+ALTER TABLE `tbl_komentar`
+  MODIFY `komentar_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT for table `tbl_log_aktivitas`
+--
+ALTER TABLE `tbl_log_aktivitas`
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `tbl_pengguna`
+--
+ALTER TABLE `tbl_pengguna`
+  MODIFY `pengguna_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `tbl_pengunjung`
+--
+ALTER TABLE `tbl_pengunjung`
+  MODIFY `pengunjung_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=951;
+--
+-- AUTO_INCREMENT for table `tbl_portfolio`
+--
+ALTER TABLE `tbl_portfolio`
+  MODIFY `port_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `tbl_post_rating`
+--
+ALTER TABLE `tbl_post_rating`
+  MODIFY `rate_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT for table `tbl_post_views`
+--
+ALTER TABLE `tbl_post_views`
+  MODIFY `views_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+--
+-- AUTO_INCREMENT for table `tbl_testimoni`
+--
+ALTER TABLE `tbl_testimoni`
+  MODIFY `testimoni_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `tbl_tulisan`
+--
+ALTER TABLE `tbl_tulisan`
+  MODIFY `tulisan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
